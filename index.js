@@ -62,7 +62,5 @@ io.on('connection', function (socket) {
     });
 });
 
-http.listen(8989, function () {
-    console.log('listening on :8989');
-});
+http.listen(process.env.PORT || 3000)
 
