@@ -1,9 +1,15 @@
-<!doctype html>
-<html>
+<!-- view/partials/head.ejs -->
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Search Magic: The Gathering cards">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
     <title>Socket.IO chat</title>
-    <style>
+    <%# <style>
         * {
             margin: 0;
             padding: 0;
@@ -49,30 +55,7 @@
         #messages li:nth-child(odd) {
             background: #eee;
         }
-    </style>
+    </style> %>
 </head>
 
 <body>
-    <ul id="messages"></ul>
-    <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-        var socket = io();
-        var form = document.querySelector("form");
-        var message = document.querySelector("#m");
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-            socket.emit("chat message", m.value);
-            m.value = "";
-            return false;
-        });
-        socket.on("chat message", function (msg) {
-            document.querySelector("#messages").innerHTML += "<li>" + msg + " </li>";
-        });
-    </script>
-</body>
-
-</html>

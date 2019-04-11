@@ -1,17 +1,47 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const googleProfanityWords = require('google-profanity-words');
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
+app.set("views", "view");
+app.set("view engine", "ejs");
+
+app.use(express.static('public'))
+
+app.get('/', index)
+app.get('/chat', chatRedirect)
+app.post('/chat', chat)
+
+
+function index(req, res) {
+    res.render("pages/index");
+};
+
+function chatRedirect(req, res) {
+    res.redirect("/")
+}
+
+function chat(req, res) {
+    res.render("pages/chat");
+}
 
 let badWords = googleProfanityWords.list()
 
 io.on('connection', function (socket) {
+
+    socket.broadcast.emit('newUser', socket.id);
+
+    socket.on('setUserName', function (nickname) {
+        socket.username = nickname;
+        console.log(socket.username)
+        io.emit('newName', nickname);
+    });
+
     socket.on('chat message', function (msg) {
-        let words = msg.split(" ")
+        msg.username = socket.username
+
+        let words = msg.message.split(" ")
         let sensoredWords = []
         words.forEach(word => {
             if (badWords.includes(word)) {
@@ -22,7 +52,13 @@ io.on('connection', function (socket) {
             }
         });
         let newMsg = sensoredWords.join(" ")
-        io.emit('chat message', newMsg);
+        msg.message = newMsg
+        io.emit('chat message', msg);
+    });
+
+    socket.on('disconnect', function () {
+        console.log("disconect")
+        io.sockets.emit('userLeft', socket.username);
     });
 });
 
