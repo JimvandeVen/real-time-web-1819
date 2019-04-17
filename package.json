@@ -18,11 +18,14 @@
   },
   "homepage": "https://github.com/cmda-minor-web/real-time-web-1819#readme",
   "dependencies": {
+    "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "google-profanity-words": "^1.0.0",
     "nodemon": "^1.18.11",
+    "sentiment": "^5.0.1",
     "socket.io": "^2.2.0",
+    "twit": "^2.2.11",
     "twitter": "^1.7.1"
   }
 }

@@ -35,3 +35,9 @@ socket.on("chat message", function (msg) {
 
     document.querySelector("#messages").innerHTML += "<li>" + msg.username.toUpperCase() + ":" + msg.message + " </li>";
 });
+
+socket.on("tweet", function (tweet) {
+
+    document.querySelector("#messages").innerHTML += "<li>" + tweet.author + ":" + tweet.body + " </li>";
+    console.log(tweet)
+})
