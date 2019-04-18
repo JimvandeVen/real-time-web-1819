@@ -14,7 +14,7 @@ During this course I will learn how to build a **meaningful** real-time applicat
 - [Feedback](#feedback)
 
 ## Concept
-My concept is an application wherin you, as a user, can see the most positive as well as the most negative tweets about the brexit. It will also show a feed of all the tweets that were sent. The user should be able to filter and sort the feed. All the tweets are gathered in an open stream and will be updated realtime via socket.io.  
+My concept is an application wherin you, as a user, can see the most positive as well as the most negative tweets about the brexit. It will also show a feed of all the tweets that were sent. The user should be able to filter and sort the feed. All the tweets are gathered in an open stream and will be updated realtime via socket.io. The meaning of this app is to find out what the general sentiment is among twitter users concernig brexit. Something you might not find out watching the news. 
 
 ## API
 I use the twitter API to get tweets. To get a connection with your server you have to use OAuth. For this I use a node package called [twit](https://www.npmjs.com/package/twit). The data twitter returns is quiet extensive.
