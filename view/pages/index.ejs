@@ -1,11 +1,22 @@
 <% include ../partials/head %>
-    <form id="nameForm" action="">
-        <label for="nickname">Nickname</label>
-        <input type="text" name="nickname" id="nickname">
-        <input type="submit" value="Submit">
-    </form>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+<% include ../partials/header %>
+<section class="topTweets">
+    <div class="positive topTweet">
+        <h2>Most Positive Tweet</h2>
+        <div class="tweet">
+            <h3></h3>
+            <p></p>
+        </div>
+    </div>
+    <div class="negative topTweet">
+        <h2>Most Negative Tweet</h2>
+        <div class="tweet">
+            <h3></h3>
+            <p></p>
+        </div>
+    </div>
+</section>
+<section class="feed">
+
+</section>
 <% include ../partials/foot %>
