@@ -31,6 +31,7 @@ let stream = T.stream('statuses/filter', { track: '#brexit', language: 'en', twe
 
 stream.on('tweet', function (stream) {
     streamHandler(stream)
+    console.log(stream)
 })
 
 let tweets = []
