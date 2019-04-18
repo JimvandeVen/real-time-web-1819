@@ -236,4 +236,4 @@ This is my data life cycle. My server manipulates the data to look like this:
 ![Focus](screens/dataSketch.jpeg)
 
 ## Feedback
-What I also noticed the website has many third party scripts that use bandwidth to load. Your own html, css and javascript files use caching headers. It would be nice to use the same caching policy for those third party scripts. Be it by caching headers or by adding a service worker that caches those files. This way the repeat visits would be much, much faster. Implementing this may take some effort though, if at all possible.
+I would like to get some feedback on the concept. Is there maybe something more meaningfull I can do with the data gathered? Dopnt go to had on the look of the app. I'ts not done yet.
