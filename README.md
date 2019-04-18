@@ -217,7 +217,7 @@ I use the twitter API to get tweets. To get a connection with your server you ha
 ## Most Important Screens
 
 These are my most important screens. Currently I only the main screen has sketches.
-![Index.ejs](screens/indexScetch.jpeg)
+![Index.ejs](screens/indexSketch.jpeg)
 ## Data Life Cycle
 This is my data life cycle. My server manipulates the data to look like this:
 
