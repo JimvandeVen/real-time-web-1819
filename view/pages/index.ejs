@@ -1,5 +1,14 @@
 <% include ../partials/head %>
 <% include ../partials/header %>
+<form class="sentimentForm">
+    <h2>Are you pro or con Brexit?</h2>
+    <input type="radio" id="pro" name="sentiment" value="pro">
+    <label for="pro">PRO</label>
+    <input type="radio" id="con" name="sentiment" value="con">
+    <label for="con">CON</label>
+
+    <input type="submit" value="Submit">
+</form>
 <section class="topTweets">
     <div class="positive topTweet">
         <h2>Most Positive Tweet</h2>

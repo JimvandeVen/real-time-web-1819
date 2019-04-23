@@ -1,29 +1,28 @@
-const socket = io();
-// const form = document.querySelector("#form");
-// const message = document.querySelector("#m");
-// const nameForm = document.querySelector("#nameForm");
+const socket = io.connect(window.location.origin);
+const sentimentForm = document.querySelector(".sentimentForm");
 
-// if (form) {
-//     form.addEventListener("submit", e => {
-//         e.preventDefault();
-//         socket.emit("chat message", {
-//             message: m.value
-//         });
-//         m.value = "";
-//         return false;
-//     });
-// }
+if (sentimentForm) {
+    sentimentForm.addEventListener("submit", e => {
+        e.preventDefault();
+        let sentiment = new FormData(sentimentForm)
+        let output = ""
+        for (const entry of sentiment) {
+            output = entry[1];
+        };
+        console.log(output)
+        // socket.emit("setSentiment", output);
+        if (output == "pro") {
+            socket.emit("joinPro")
+            // socket.join('proBrexit room');
+        } else {
+            socket.emit("joinCon")
 
-// if (nameForm) {
-//     nameForm.addEventListener("submit", e => {
-//         e.preventDefault();
-//         socket.emit("setUserName", nickname.value);
-//         nickname.value = "";
-//         nameForm.remove()
-//         return false;
-//     });
-// }
-
+            // socket.join('conBrexit room');
+        }
+        sentimentForm.remove()
+        // return false;
+    });
+}
 // socket.on('newName', function (nickname) {
 //     console.log("new username for user: " + nickname);
 
@@ -36,27 +35,45 @@ const socket = io();
 //     document.querySelector("#messages").innerHTML += "<li>" + msg.username.toUpperCase() + ":" + msg.message + " </li>";
 // });
 
-socket.on("tweet", function (tweets) {
+socket.on("likes", function (tweets) {
 
-    // document.querySelector(".positive").innerHTML = "<h2>Most Positive Tweet</h2>" + '<div class="tweet"> <h3>' + tweets[tweets.length - 1].author + '<h3>' + "<p>" + tweets[tweets.length - 1].body + "</p> </div>";
     document.querySelector(".positive").innerHTML = `<h2>Most Positive Tweet</h2><div class="tweet"><h3>${tweets[tweets.length - 1].author}</h3><img class="avatar" src="${tweets[tweets.length - 1].avatar}"></img><p>${tweets[tweets.length - 1].body}</p></div>`;
+
     document.querySelector(".negative").innerHTML = `<h2>Most Negative Tweet</h2><div class="tweet"><h3>${tweets[0].author}</h3><img class="avatar" src="${tweets[0].avatar}"></img><p>${tweets[0].body}</p></div>`;
-
-    // if (tweets.length < 10) {
-
-    // document.querySelector(".feed").innerHTML = tweets.foreach(tweet => {
-    //     `<div class="tweet"><h3>${tweet.author}<h3><p>${tweets.body}</p></div>`
-    // })
-
-
-    // console.log(tweets)
 })
 
-socket.on("autoFeed", function (tweets) {
-    console.log(tweets)
-    tweets.forEach(tweet => {
-        document.querySelector(".feed").innerHTML += `<div class="tweet"><h3>${tweet.author}</h3><img class="avatar" src="${tweet.avatar}"></img><p>${tweet.body}</p></div>`
-    });
+socket.on("autoFeed", function (tweet) {
+    console.log(tweet)
+    document.querySelector(".feed").innerHTML +=
+        `<div class="tweet">
+            <h3>${tweet.author}</h3>
+            <form class="likeForm">
+                <input type="radio" data-id="${tweet.twid}" id="like:${tweet.twid}" name="likes" value="like">
+                <label for="like:${tweet.twid}">Like</label>
+                <input type="radio" data-id="${tweet.twid}" id="dislike:${tweet.twid}" name="likes" value="dislike">
+                <label for="dislike:${tweet.twid}">Dislike</label>
+            </form>
+            <img class="avatar" src="${tweet.avatar}"></img>
+            <p>${tweet.body}</p>
+        </div>`
 
+    const likeForms = document.querySelectorAll(".likeForm")
+    likeForms.forEach(likeForm => {
+        likeForm.addEventListener("change", function (e) {
+            likeHandler(e)
+        })
+    })
 })
+
+function likeHandler(e) {
+    let like = {
+        likedId: e.srcElement.dataset.id,
+        value: e.srcElement.value
+    }
+
+
+    socket.emit("likeHandler", like)
+    console.log(like);
+
+}
 
