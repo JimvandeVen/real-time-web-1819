@@ -14,7 +14,7 @@ During this course I will learn how to build a **meaningful** real-time applicat
 - [Feedback](#feedback)
 
 ## Concept
-My concept is an application wherin you, as a user, can see the most positive as well as the most negative tweets about the brexit. It will also show a feed of all the tweets that were sent. The user should be able to filter and sort the feed. All the tweets are gathered in an open stream and will be updated realtime via socket.io.  
+My concept is an application wherin you, as a user, can see the most positive as well as the most negative tweets about the brexit. It will also show a feed of all the tweets that were sent. The user should be able to filter and sort the feed. All the tweets are gathered in an open stream and will be updated realtime via socket.io. The meaning of this app is to find out what the general sentiment is among twitter users concernig brexit. Something you might not find out watching the news. 
 
 ## API
 I use the twitter API to get tweets. To get a connection with your server you have to use OAuth. For this I use a node package called [twit](https://www.npmjs.com/package/twit). The data twitter returns is quiet extensive.
@@ -217,7 +217,7 @@ I use the twitter API to get tweets. To get a connection with your server you ha
 ## Most Important Screens
 
 These are my most important screens. Currently I only the main screen has sketches.
-![Index.ejs](screens/indexScetch.jpeg)
+![Index.ejs](screens/indexSketch.jpeg)
 ## Data Life Cycle
 This is my data life cycle. My server manipulates the data to look like this:
 
@@ -236,4 +236,4 @@ This is my data life cycle. My server manipulates the data to look like this:
 ![Focus](screens/dataSketch.jpeg)
 
 ## Feedback
-What I also noticed the website has many third party scripts that use bandwidth to load. Your own html, css and javascript files use caching headers. It would be nice to use the same caching policy for those third party scripts. Be it by caching headers or by adding a service worker that caches those files. This way the repeat visits would be much, much faster. Implementing this may take some effort though, if at all possible.
+I would like to get some feedback on the concept. Is there maybe something more meaningfull I can do with the data gathered? Dopnt go to had on the look of the app. I'ts not done yet.
