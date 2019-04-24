@@ -13,15 +13,36 @@ if (sentimentForm) {
         // socket.emit("setSentiment", output);
         if (output == "pro") {
             socket.emit("joinPro")
+            addTitle(output)
+            changeBackground(output)
             // socket.join('proBrexit room');
         } else {
             socket.emit("joinCon")
-
+            addTitle(output)
+            changeBackground(output)
             // socket.join('conBrexit room');
         }
         sentimentForm.remove()
         // return false;
     });
+}
+
+function addTitle(sentiment) {
+    let topTweetTitle = document.querySelector("#topTweetTitle")
+    if (sentiment == "pro") {
+        topTweetTitle.innerHTML = "What do people against Brexit think about tweets rooting for Brexit?"
+    } else {
+        topTweetTitle.innerHTML = "What do the Brexiteers think about tweets against Brexit?"
+    }
+}
+function changeBackground(sentiment) {
+    let body = document.querySelector("body")
+    if (sentiment == "pro") {
+        body.style.backgroundImage = 'url(https://www.embassyoflibya.eu/wp-content/uploads/2015/04/flag_EU-A.jpg)';
+    } else {
+        body.style.backgroundImage = 'url(https://i.pinimg.com/originals/01/9c/6a/019c6ae6c2e39f2de7f292e20a5cc74e.jpg)'
+            ;
+    }
 }
 // socket.on('newName', function (nickname) {
 //     console.log("new username for user: " + nickname);
