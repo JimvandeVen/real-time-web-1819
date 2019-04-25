@@ -33,7 +33,6 @@ let conTweets = []
 let stream = T.stream('statuses/filter', { track: '#brexit', language: 'en', tweet_mode: "extended" })
 
 stream.on('tweet', function (stream) {
-    // console.log("tweet");
     streamHandler(stream)
 })
 
@@ -71,7 +70,6 @@ async function extendedTweet(stream) {
         return tweet
     }
     await tweetSorter(crObj(stream))
-
 }
 
 async function tweet(stream) {
@@ -90,7 +88,6 @@ async function tweet(stream) {
         return tweet
     }
     await tweetSorter(crObj(stream))
-
 }
 
 function tweetSorter(tweet) {
@@ -110,7 +107,7 @@ function tweetSorter(tweet) {
 
 io.on("connection", function (socket) {
 
-    socket.on('joinPro', function () { //Janno vragen wat ie hier nou precies bedoelde!!!!!!!!!
+    socket.on('joinPro', function () {
         socket.join('proBrexit');
         console.log("pro");
     });
@@ -121,6 +118,7 @@ io.on("connection", function (socket) {
     });
 
     socket.on("likeHandler", function (like) {
+        console.log(conTweets.length)
         if (conTweets.length) {
             conTweets.forEach(conTweet => {
                 if (conTweet.twid == like.likedId) {
@@ -129,11 +127,11 @@ io.on("connection", function (socket) {
                     } else {
                         conTweet.likes++
                     }
-                    console.log("conTweetLike")
                     io.to('conBrexit').emit('likes', conTweets.sort(compare));
                 }
             })
         }
+        console.log(conTweets.length)
         if (proTweets.length) {
             proTweets.forEach(proTweet => {
                 if (proTweet.twid == like.likedId) {
@@ -142,7 +140,6 @@ io.on("connection", function (socket) {
                     } else {
                         proTweet.likes++
                     }
-                    console.log("proTweetLike")
                     io.to('proBrexit').emit('likes', proTweets.sort(compare));
                 }
             })

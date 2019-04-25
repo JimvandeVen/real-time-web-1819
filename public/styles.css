@@ -3,6 +3,7 @@ body {
     font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
+    background-position: center; 
 }
 
 header{
@@ -15,28 +16,24 @@ header{
 }
 
 .topTweets{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: white;
-}
-
-.topTweet{
-    background-color: white;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.19);
-    width: 40%;
-    padding: .5em;
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
     text-align: center;
-    min-height: 15em;
 }
 
 .positive{
     background-color: green;
+    max-width: 50%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.19);
+    padding: 1em;
 }
 
 .negative{
     background-color: red;
+    max-width: 50%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.19);
+    padding: 1em;
 }
 
 .avatar{
@@ -48,13 +45,70 @@ header{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    min-height: 30vh;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 1em;
 }
 
 .tweet{
-    width: 80%;
+    background-color: white;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.19);
+    border-radius: 10px;
+    padding: .5em;
+    margin-bottom: 1em;
+    animation: expand .2s ease-in-out;
+}
+
+.oldTweet{
     background-color: white;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.19);
     border-radius: 10px;
     padding: .5em;
     margin-bottom: 1em;
 }
+
+.sentimentForm{
+    background-color: white;
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+.hide{
+    display: none;
+}
+
+@keyframes expand {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+}
+
+.topTweetWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.liked{
+    min-width: 45vw;
+}
+
+.disliked{
+    min-width: 45vw;
+}
+
+.yourLiked{
+    transform: scale(0.2);
+}
+
+.likedBox{
+    width: 100vw;
+    background-color: black;
+}
+
+/* .feedText{
+    flexp
+} */

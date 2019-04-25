@@ -10,29 +10,28 @@ if (sentimentForm) {
             output = entry[1];
         };
         console.log(output)
-        // socket.emit("setSentiment", output);
         if (output == "pro") {
             socket.emit("joinPro")
             addTitle(output)
             changeBackground(output)
-            // socket.join('proBrexit room');
         } else {
             socket.emit("joinCon")
             addTitle(output)
             changeBackground(output)
-            // socket.join('conBrexit room');
         }
         sentimentForm.remove()
-        // return false;
     });
 }
 
 function addTitle(sentiment) {
-    let topTweetTitle = document.querySelector("#topTweetTitle")
+    const topTweetTitle = document.querySelector("#topTweetTitle")
+    const feedText = document.querySelector(".feedText")
     if (sentiment == "pro") {
-        topTweetTitle.innerHTML = "What do people against Brexit think about tweets rooting for Brexit?"
+        topTweetTitle.innerHTML = "What do pro Europeans think about tweets rooting for Brexit?"
+        feedText.innerHTML = "What do you think about tweets written by pro Europeans? Like or dislike their tweets."
     } else {
         topTweetTitle.innerHTML = "What do the Brexiteers think about tweets against Brexit?"
+        feedText.innerHTML = "What do you think about tweets written by Brexiteers? Like or dislike their tweets."
     }
 }
 function changeBackground(sentiment) {
@@ -44,27 +43,39 @@ function changeBackground(sentiment) {
             ;
     }
 }
-// socket.on('newName', function (nickname) {
-//     console.log("new username for user: " + nickname);
-
-//     document.querySelector("#messages").innerHTML += "<li>" + nickname.toUpperCase() + " just joined the chatroom" + " </li>";
-// });
-
-// socket.on("chat message", function (msg) {
-//     console.log(msg);
-
-//     document.querySelector("#messages").innerHTML += "<li>" + msg.username.toUpperCase() + ":" + msg.message + " </li>";
-// });
-
 socket.on("likes", function (tweets) {
 
-    document.querySelector(".positive").innerHTML = `<h2>Most Positive Tweet</h2><div class="tweet"><h3>${tweets[tweets.length - 1].author}</h3><img class="avatar" src="${tweets[tweets.length - 1].avatar}"></img><p>${tweets[tweets.length - 1].body}</p></div>`;
-
-    document.querySelector(".negative").innerHTML = `<h2>Most Negative Tweet</h2><div class="tweet"><h3>${tweets[0].author}</h3><img class="avatar" src="${tweets[0].avatar}"></img><p>${tweets[0].body}</p></div>`;
+    document.querySelector(".liked").innerHTML = likes(tweets);
+    if (tweets.length >= 4) {
+        document.querySelector(".disliked").innerHTML = dislikes(tweets);
+    }
+    document.querySelector(".topTweets").classList.remove("hide")
+    removeAnimation()
 })
 
+function likes(tweets) {
+    let likes
+    if (tweets.length == 1) {
+        likes = `<div class="tweet"><h3>${tweets[tweets.length - 1].author}</h3><img class="avatar" src="${tweets[tweets.length - 1].avatar}"></img><p>${tweets[tweets.length - 1].body}</p></div>`
+        return likes
+    } else if (tweets.length >= 2) {
+        likes = `<div class="tweet"><h3>${tweets[tweets.length - 1].author}</h3><img class="avatar" src="${tweets[tweets.length - 1].avatar}"></img><p>${tweets[tweets.length - 1].body}</p></div><div class="tweet"><h3>${tweets[tweets.length - 2].author}</h3><img class="avatar" src="${tweets[tweets.length - 2].avatar}"></img><p>${tweets[tweets.length - 2].body}</p></div>`
+        return likes
+    }
+}
+
+function dislikes(tweets) {
+    let dislikes
+    if (tweets.length == 1) {
+        dislikes = `<div class="tweet"><h3>${tweets[0].author}</h3><img class="avatar" src="${tweets[0].avatar}"></img><p>${tweets[0].body}</p></div>`
+        return dislikes
+    } else if (tweets.length >= 2) {
+        dislikes = `<div class="tweet"><h3>${tweets[0].author}</h3><img class="avatar" src="${tweets[0].avatar}"></img><p>${tweets[0].body}</p></div><div class="tweet"><h3>${tweets[1].author}</h3><img class="avatar" src="${tweets[1].avatar}"></img><p>${tweets[1].body}</p></div>`
+        return dislikes
+    }
+}
+
 socket.on("autoFeed", function (tweet) {
-    console.log(tweet)
     document.querySelector(".feed").innerHTML +=
         `<div class="tweet">
             <h3>${tweet.author}</h3>
@@ -84,17 +95,24 @@ socket.on("autoFeed", function (tweet) {
             likeHandler(e)
         })
     })
+    removeAnimation()
 })
+
+function removeAnimation() {
+    const tweets = document.querySelectorAll(".tweet")
+    tweets.forEach(tweet => {
+        tweet.classList.add("oldTweet")
+        setTimeout(function () { tweet.classList.remove("tweet"); }, 300);
+    })
+}
 
 function likeHandler(e) {
     let like = {
         likedId: e.srcElement.dataset.id,
         value: e.srcElement.value
     }
-
+    console.log(e.srcElement.parentElement.parentElement);
 
     socket.emit("likeHandler", like)
-    console.log(like);
-
 }
 

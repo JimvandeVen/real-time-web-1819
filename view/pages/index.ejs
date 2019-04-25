@@ -1,32 +1,33 @@
 <% include ../partials/head %>
 <% include ../partials/header %>
 <form class="sentimentForm">
-    <h2>Are you pro or con Brexit?</h2>
+    <h2>Are you pro Europe or pro Brexit?</h2>
     <input type="radio" id="pro" name="sentiment" value="pro">
-    <label for="pro">PRO</label>
+    <label for="pro">Brexit</label>
     <input type="radio" id="con" name="sentiment" value="con">
-    <label for="con">CON</label>
-
+    <label for="con">Europe</label>
     <input type="submit" value="Submit">
 </form>
 <section class="topTweets hide">
     <h2 id="topTweetTitle"></h2>
-    <div class="positive topTweet">
-        <h2>Most Positive Tweet</h2>
-        <div class="tweet">
-            <h3></h3>
-            <p></p>
+    <div class="topTweetWrapper">
+        <div class="positive">
+            <h2>Most Liked Tweets</h2>
+            <div class="liked"></div>
+        </div>
+        <div class="negative">
+            <h2>Most Disliked Tweets</h2>
+            <div class="disliked"></div>
         </div>
     </div>
-    <div class="negative topTweet">
-        <h2>Most Negative Tweet</h2>
-        <div class="tweet">
-            <h3></h3>
-            <p></p>
-        </div>
-    </div>
+    
 </section>
-<section class="feed hide">
-
+<section class="feed">
+    <h2 class="feedTitle">Your Twitter feed</h2>
+    <p class="feedText"></p>
+</section>
+<section class="likedBox">
+    <h2>Your liked/disliked tweets</h2>
+    <div class="likedBoxContainer" ></div>
 </section>
 <% include ../partials/foot %>
