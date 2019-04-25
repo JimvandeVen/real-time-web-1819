@@ -111,8 +111,16 @@ function likeHandler(e) {
         likedId: e.srcElement.dataset.id,
         value: e.srcElement.value
     }
-    console.log(e.srcElement.parentElement.parentElement);
-
+    // console.log(e.srcElement.parentElement);
+    const targetElement = document.querySelector(".likedBoxContainer")
+    const movingElement = e.srcElement.parentElement.parentElement
+    moveElement(targetElement, movingElement)
     socket.emit("likeHandler", like)
+}
+
+function moveElement(targetElement, movingElement) {
+    targetElement.appendChild(movingElement);
+    movingElement.classList.add("yourLiked")
+    console.log(movingElement)
 }
 
