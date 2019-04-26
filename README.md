@@ -223,6 +223,7 @@ I use the twitter API to get tweets. To get a connection with your server you ha
 This is my data life cycle. My server manipulates the data to look like this:
 <details>
   <summary>Data as manipulated by the server</summary>
+  
 ```js
   let tweet = { 
   twid: 1121692332162789400,
