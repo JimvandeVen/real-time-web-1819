@@ -3,7 +3,9 @@
 ## Introduction
 During this course I will learn how to build a **meaningful** real-time application. I will learn techniques to setup an open connection between the client and the server. This will enable me to send data in real-time both ways, at the same time.
 
-![Brexit Bubble Breaker](screens/screenshot.png)
+[DEMO](https://chatroomjim.herokuapp.com/)
+
+![Brexit Bubble Breaker](screens/screenshot2.png)
 
 ## Table of Contents
 
@@ -15,10 +17,12 @@ During this course I will learn how to build a **meaningful** real-time applicat
 
 ## Concept
 ### Brexit Bubble Breaker
-My concept is an application wherin you, as a user, get asked if you are pro Brexit or pro European. Once you select which one you are you get sent to the opposite room. This means pro Brexit users get to see the negative tweets about Brexit in a live feed. Then the user can like or dislike those tweets. Once the tweets are liked they get sent to the pro European users. This way they can see which tweets are liked and disliked. This works for both rooms. The meaning of this app is to get people out of their Vrexit bubble, hence the name.
+My concept is an application wherin you, as a user, get asked if you are pro Brexit or pro European. Once you select which one you are you get sent to the opposite room. This means pro Brexit users get to see the negative tweets about Brexit in a live feed. Then the user can like or dislike those tweets. Once the tweets are liked they get sent to the pro European users. This way they can see which tweets are liked and disliked. This works for both rooms. The meaning of this app is to get people out of their Brexit bubble, hence the name.
 
 ## API
 I use the twitter API to get tweets. To get a connection with your server you have to use OAuth. For this I use a node package called [twit](https://www.npmjs.com/package/twit). The data twitter returns is quiet extensive.
+
+
 
 
 <details>
@@ -215,28 +219,13 @@ I use the twitter API to get tweets. To get a connection with your server you ha
 ```
 </details>
 
-## Most Important Screens
-
-These are my most important screens. Currently I only the main screen has sketches.
-![Index.ejs](screens/indexSketch.jpeg)
 ## Data Life Cycle
 This is my data life cycle. My server manipulates the data to look like this:
-
+<details>
+  <summary>Data as manipulated by the server</summary>
 ```js
-  let tweet = {
-            twid: stream.id,
-            active: false,
-            author: stream.user.name,
-            avatar: stream.user.profile_image_url,
-            body: stream.text,
-            date: stream.created_at,
-            screenname: stream.user.screen_name,
-            sentiment: sentiment.analyze(stream.text)
-        };
-```
-![Focus](screens/dataSketch.jpeg)
-
-{ twid: 1121692332162789400,
+  let tweet = { 
+  twid: 1121692332162789400,
     active: false,
     author: 'Julian Shea',
     avatar:
@@ -273,30 +262,19 @@ This is my data life cycle. My server manipulates the data to look like this:
        words: [ 'forget', 'success' ],
        positive: [ 'forget', 'success' ],
        negative: [] },
-    likes: 0 }
+    likes: 0 };
+```
+</details>
 
-    io.to('proBrexit').emit('autoFeed', tweet);
-  
-    socket.emit("likeHandler", like)
+![Focus](screens/datalifecycle.png)
 
-    io.to('conBrexit').emit('likes', conTweets.sort(compare));
-
-    socket.on("likes", function (tweets) {
+The data gets changed at the two green circles.
+1. The data gets changed by the server as it comes in from the API see above
+2. The user gives likes or dislikes and this changes the value of likes
 
 ## Sources
 Underneath you will find all the sources that were previously mentioned throughout the document and some others which were helpful.
 
-> * [Clean CSS](https://www.npmjs.com/package/clean-css)
-> * [JavaScript Minifer](https://javascript-minifier.com/)
-> * [Compression](https://www.npmjs.com/package/compression)
-> * [Shrink Ray](https://www.npmjs.com/package/shrink-ray)
-> * [Bread Compressor CLI](https://www.npmjs.com/package/bread-compressor-cli)
-> * [Gulp](https://www.npmjs.com/package/gulp) 
-> * [Gulp Rev](https://www.npmjs.com/package/gulp-rev)
-> * [Gulp Rev Collector](https://www.npmjs.com/package/gulp-rev-collector)
-
-> * [Mozzila: Picture element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
-> * [WikiHow: Disable JavaScript](https://www.wikihow.com/Disable-JavaScript)
-> * [Google: Caching files with Service Worker](https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker)
-> * [Captech: My Experience using serviceworkers](https://www.captechconsulting.com/blogs/my-experience-using-service-workers)
-> * [Google: Adding a Service Worker and Offline](https://developers.google.com/web/fundamentals/codelabs/offline/)
+> * [sentiment](https://www.npmjs.com/package/sentiment)
+> * [socket.io](https://www.npmjs.com/package/socket.io)
+> * [twit](https://www.npmjs.com/package/twit)
