@@ -67,6 +67,8 @@ async function extendedTweet(stream) {
             sentiment: sentiment.analyze(stream.extended_tweet.full_text),
             likes: 0
         };
+        console.log(tweet);
+
         return tweet
     }
     await tweetSorter(crObj(stream))
