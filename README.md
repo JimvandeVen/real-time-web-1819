@@ -236,6 +236,53 @@ This is my data life cycle. My server manipulates the data to look like this:
 ```
 ![Focus](screens/dataSketch.jpeg)
 
+{ twid: 1121692332162789400,
+    active: false,
+    author: 'Julian Shea',
+    avatar:
+     'http://pbs.twimg.com/profile_images/2391879414/me_normal.jpg',
+    body:
+     "'#grayling.... In my office NOW'. They were going to make a #titanic success of #brexit, don't forget #BrexitChaos #brexitshambles \nhttps://t.co/cgt6SzCJil",
+    date: 'Fri Apr 26 08:27:46 +0000 2019',
+    screenname: 'juliansheasport',
+    sentiment:
+     { score: 3,
+       comparative: 0.14285714285714285,
+       tokens:
+        [ "'grayling",
+          'in',
+          'my',
+          'office',
+          "now'",
+          'they',
+          'were',
+          'going',
+          'to',
+          'make',
+          'a',
+          'titanic',
+          'success',
+          'of',
+          'brexit',
+          "don't",
+          'forget',
+          'brexitchaos',
+          'brexitshambles',
+          '',
+          'httpstcocgt6szcjil' ],
+       words: [ 'forget', 'success' ],
+       positive: [ 'forget', 'success' ],
+       negative: [] },
+    likes: 0 }
+
+    io.to('proBrexit').emit('autoFeed', tweet);
+  
+    socket.emit("likeHandler", like)
+
+    io.to('conBrexit').emit('likes', conTweets.sort(compare));
+
+    socket.on("likes", function (tweets) {
+
 ## Sources
 Underneath you will find all the sources that were previously mentioned throughout the document and some others which were helpful.
 
