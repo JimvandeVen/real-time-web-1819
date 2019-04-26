@@ -3,7 +3,7 @@
 ## Introduction
 During this course I will learn how to build a **meaningful** real-time application. I will learn techniques to setup an open connection between the client and the server. This will enable me to send data in real-time both ways, at the same time.
 
-![Screenshot](screens/screenshot.png)
+![Brexit Bubble Breaker](screens/screenshot.png)
 
 ## Table of Contents
 
@@ -11,10 +11,11 @@ During this course I will learn how to build a **meaningful** real-time applicat
 - [API](#api)
 - [Most Important Screens](#most-important-screens)
 - [Data Life Cycle](#data-life-cycle)
-- [Feedback](#feedback)
+- [Sources](#sources)
 
 ## Concept
-My concept is an application wherin you, as a user, can see the most positive as well as the most negative tweets about the brexit. It will also show a feed of all the tweets that were sent. The user should be able to filter and sort the feed. All the tweets are gathered in an open stream and will be updated realtime via socket.io. The meaning of this app is to find out what the general sentiment is among twitter users concernig brexit. Something you might not find out watching the news. 
+### Brexit Bubble Breaker
+My concept is an application wherin you, as a user, get asked if you are pro Brexit or pro European. Once you select which one you are you get sent to the opposite room. This means pro Brexit users get to see the negative tweets about Brexit in a live feed. Then the user can like or dislike those tweets. Once the tweets are liked they get sent to the pro European users. This way they can see which tweets are liked and disliked. This works for both rooms. The meaning of this app is to get people out of their Vrexit bubble, hence the name.
 
 ## API
 I use the twitter API to get tweets. To get a connection with your server you have to use OAuth. For this I use a node package called [twit](https://www.npmjs.com/package/twit). The data twitter returns is quiet extensive.
@@ -235,5 +236,67 @@ This is my data life cycle. My server manipulates the data to look like this:
 ```
 ![Focus](screens/dataSketch.jpeg)
 
-## Feedback
-I would like to get some feedback on the concept. Is there maybe something more meaningfull I can do with the data gathered? Dopnt go to had on the look of the app. I'ts not done yet.
+{ twid: 1121692332162789400,
+    active: false,
+    author: 'Julian Shea',
+    avatar:
+     'http://pbs.twimg.com/profile_images/2391879414/me_normal.jpg',
+    body:
+     "'#grayling.... In my office NOW'. They were going to make a #titanic success of #brexit, don't forget #BrexitChaos #brexitshambles \nhttps://t.co/cgt6SzCJil",
+    date: 'Fri Apr 26 08:27:46 +0000 2019',
+    screenname: 'juliansheasport',
+    sentiment:
+     { score: 3,
+       comparative: 0.14285714285714285,
+       tokens:
+        [ "'grayling",
+          'in',
+          'my',
+          'office',
+          "now'",
+          'they',
+          'were',
+          'going',
+          'to',
+          'make',
+          'a',
+          'titanic',
+          'success',
+          'of',
+          'brexit',
+          "don't",
+          'forget',
+          'brexitchaos',
+          'brexitshambles',
+          '',
+          'httpstcocgt6szcjil' ],
+       words: [ 'forget', 'success' ],
+       positive: [ 'forget', 'success' ],
+       negative: [] },
+    likes: 0 }
+
+    io.to('proBrexit').emit('autoFeed', tweet);
+  
+    socket.emit("likeHandler", like)
+
+    io.to('conBrexit').emit('likes', conTweets.sort(compare));
+
+    socket.on("likes", function (tweets) {
+
+## Sources
+Underneath you will find all the sources that were previously mentioned throughout the document and some others which were helpful.
+
+> * [Clean CSS](https://www.npmjs.com/package/clean-css)
+> * [JavaScript Minifer](https://javascript-minifier.com/)
+> * [Compression](https://www.npmjs.com/package/compression)
+> * [Shrink Ray](https://www.npmjs.com/package/shrink-ray)
+> * [Bread Compressor CLI](https://www.npmjs.com/package/bread-compressor-cli)
+> * [Gulp](https://www.npmjs.com/package/gulp) 
+> * [Gulp Rev](https://www.npmjs.com/package/gulp-rev)
+> * [Gulp Rev Collector](https://www.npmjs.com/package/gulp-rev-collector)
+
+> * [Mozzila: Picture element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
+> * [WikiHow: Disable JavaScript](https://www.wikihow.com/Disable-JavaScript)
+> * [Google: Caching files with Service Worker](https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker)
+> * [Captech: My Experience using serviceworkers](https://www.captechconsulting.com/blogs/my-experience-using-service-workers)
+> * [Google: Adding a Service Worker and Offline](https://developers.google.com/web/fundamentals/codelabs/offline/)
