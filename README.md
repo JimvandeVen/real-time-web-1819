@@ -17,7 +17,7 @@ During this course I will learn how to build a **meaningful** real-time applicat
 
 ## Concept
 ### Brexit Bubble Breaker
-My concept is an application wherin you, as a user, get asked if you are pro Brexit or pro European. Once you select which one you are you get sent to the opposite room. This means pro Brexit users get to see the negative tweets about Brexit in a live feed. Then the user can like or dislike those tweets. Once the tweets are liked they get sent to the pro European users. This way they can see which tweets are liked and disliked. This works for both rooms. The meaning of this app is to get people out of their Brexit bubble, hence the name.
+My concept is an application wherein you, as a user, get asked if you are pro Brexit or pro-European. Once you select which one you are you get sent to the opposite room. This means pro Brexit users get to see the negative tweets about Brexit in a live feed. Then the user can like or dislike those tweets. Once the tweets are liked they get sent to the pro European users. This way they can see which tweets are liked and disliked. This works for both rooms. The meaning of this app is to get people out of their Brexit bubble, hence the name.
 
 ## API
 I use the twitter API to get tweets. To get a connection with your server you have to use OAuth. For this I use a node package called [twit](https://www.npmjs.com/package/twit). The data twitter returns is quiet extensive.
