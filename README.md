@@ -3,7 +3,8 @@
 ## Introduction
 During this course I will learn how to build a **meaningful** real-time application. I will learn techniques to setup an open connection between the client and the server. This will enable me to send data in real-time both ways, at the same time.
 
-[DEMO](https://chatroomjim.herokuapp.com/)
+[DEMO](https://chatroomjim.herokuapp.com/)  
+To test this it is best to open two windows, select pro brexit in one window and pro europe in the other.  
 
 ![Brexit Bubble Breaker](screens/screenshot2.png)
 
